@@ -1,15 +1,9 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-using namespace std;
+#include <stdio.h>
+#include <string.h>
 int main(void)
 {
-    vector<int> numlsit;
-    for (int i = 0; i < 3; i++)
-    {
-        cin >> numlsit[1];
-    }
-    sort(numlsit);
-    return 0;
+char ch1,ch2;
+ch1='A'+'5'-'3';
+ch2='A'+'6'-'3';
+printf("%d,%c\n",ch1,ch2);
 }
