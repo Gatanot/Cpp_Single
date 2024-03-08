@@ -1,17 +1,36 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include "SortFunctions.cpp"
 using namespace std;
-void test(int *&p)
-{
-    int a = 2024;
-    p = &a;
-    cout << p << " " << *p << endl;
-}
 
-int main(void)
+int main()
 {
-    int *p = NULL;
-    test(p);
-    if (p != NULL)
-        cout << "指针p不为NULL" << endl;
+    int number[7] = {231, 423, 1345, 344, 23, 546, 324};
+    vector<int> numlist = {213, 43, 75, 234, 456, 234, 65};
+
+    SORT<int> sortlist;
+    for (int i = 0; i < 7; i++)
+    {
+        cout << number[i] << " ";
+    }
+    cout << endl;
+    sortlist.selection(number, 7);
+    for (int i = 0; i < 7; i++)
+    {
+        cout << number[i] << " ";
+    }
+    cout << endl;
+    for (size_t i = 0; i < 7; i++)
+    {
+        cout << numlist[i] << " ";
+    }
+    cout << endl;
+    sortlist.selection(numlist);
+    for (size_t i = 0; i < 7; i++)
+    {
+        cout << numlist[i] << " ";
+    }
+    cout << endl;
     return 0;
 }
