@@ -15,7 +15,7 @@ int main()
         cout << number[i] << " ";
     }
     cout << endl;
-    sortlist.selection(number, 7);
+    sortlist.shell(number, 7);
     for (int i = 0; i < 7; i++)
     {
         cout << number[i] << " ";
@@ -26,7 +26,7 @@ int main()
         cout << numlist[i] << " ";
     }
     cout << endl;
-    sortlist.selection(numlist);
+    sortlist.shell(numlist);
     for (size_t i = 0; i < 7; i++)
     {
         cout << numlist[i] << " ";
@@ -34,3 +34,4 @@ int main()
     cout << endl;
     return 0;
 }
+
