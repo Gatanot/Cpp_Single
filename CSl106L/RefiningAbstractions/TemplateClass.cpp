@@ -29,7 +29,7 @@ public:
     SecondType getSecond();
     void setSecond(SecondType newValue);
 
-    void swap(MyPAir&other);
+    void swap(MyPAir &other);
 };
 
 template <typename FirstType, typename SecondType>
@@ -53,8 +53,8 @@ void MyPAir<FirstType, SecondType>::setSecond(SecondType newValue)
     second = newValue;
 }
 template <typename FirstType, typename SecondType>
-void MyPAir<FirstType,SecondType>::swap(MyPAir& other){
-
+void MyPAir<FirstType, SecondType>::swap(MyPAir &other)
+{
 }
 int main(void)
 {

@@ -4,9 +4,16 @@ template <typename FirstType>
 class SORT
 {
 private:
+    // 归并排序的临时数组
+    std::vector<FirstType> temparray;
     // 交换index为i与j的两个元素
     void exchange(FirstType *array, int i, int j);
     void exchange(std::vector<FirstType> &array, int i, int j);
+    // 自顶向下归并排序中sort与merge的实现
+    void sort(FirstType *array, int left, int right);
+    void merge(FirstType *array, int left, int mid, int right);
+    void sort(std::vector<FirstType> array, int left, int right);
+    void merge(std::vector<FirstType> array, int left, int mid, int right);
 
 public:
     SORT(void);
@@ -20,6 +27,11 @@ public:
     // 希尔排序,h序列采用1/2(3^k-1)
     void shell(FirstType *array, int length);
     void shell(std::vector<FirstType> &array);
+    // 自顶向下归并排序
+    // 从实现上来看，归并排序似乎不适合作为一个类下的函数，或许做一个单独的类会更好些
+    // 不一定，或许可以试一下
+    void sort(FirstType *array, int length);
+    void sort(std::vector<FirstType> &array);
 };
 
 template <typename FirstType>
@@ -35,6 +47,86 @@ void SORT<FirstType>::exchange(std::vector<FirstType> &array, int i, int j)
     array[i] = array[i] ^ array[j];
     array[j] = array[i] ^ array[j];
     array[i] = array[i] ^ array[j];
+}
+template <typename FirstType>
+void SORT<FirstType>::sort(std::vector<FirstType> array, int left, int right)
+{
+    if (right <= left)
+    {
+        return;
+    }
+    int mid = left + (right - left) / 2;
+    sort(array, left, mid);
+    sort(array, mid + 1, right);
+    merge(array, left, mid, right);
+}
+template <typename FirstType>
+void SORT<FirstType>::merge(std::vector<FirstType> array, int left, int mid, int right)
+{
+    int i = left, j = mid + 1;
+    for (int k = left; k <= right; k++)
+    {
+        temparray[k] = array[k];
+    }
+    for (int k = left; k <= right; k++)
+    {
+        if (i > mid)
+        {
+            array[k] = temparray[j++];
+        }
+        else if (j > right)
+        {
+            array[k] = temparray[i++];
+        }
+        else if (temparray[j] < temparray[i])
+        {
+            array[k] = temparray[j++];
+        }
+        else
+        {
+            array[k] = temparray[i++];
+        }
+    }
+}
+template <typename FirstType>
+void SORT<FirstType>::sort(FirstType *array, int left, int right)
+{
+    if (right <= left)
+    {
+        return;
+    }
+    int mid = left + (right - left) / 2;
+    sort(array, left, mid);
+    sort(array, mid + 1, right);
+    merge(array, left, mid, right);
+}
+template <typename FirstType>
+void SORT<FirstType>::merge(FirstType *array, int left, int mid, int right)
+{
+    int i = left, j = mid + 1;
+    for (int k = left; k <= right; k++)
+    {
+        temparray[k] = array[k];
+    }
+    for (int k = left; k <= right; k++)
+    {
+        if (i > mid)
+        {
+            array[k] = temparray[j++];
+        }
+        else if (j > right)
+        {
+            array[k] = temparray[i++];
+        }
+        else if (temparray[j] < temparray[i])
+        {
+            array[k] = temparray[j++];
+        }
+        else
+        {
+            array[k] = temparray[i++];
+        }
+    }
 }
 
 template <typename FirstType>
@@ -135,4 +227,17 @@ void SORT<FirstType>::shell(std::vector<FirstType> &array)
         }
         h /= 3;
     }
+}
+
+template <typename FirstType>
+void SORT<FirstType>::sort(FirstType *array, int length)
+{
+    temparray.resize(length);
+    sort(array, 0, length - 1);
+}
+template <typename FirstType>
+void SORT<FirstType>::sort(std::vector<FirstType> &array)
+{
+    temparray.resize(array.size());
+    sort(array, 0, array.size() - 1);
 }
