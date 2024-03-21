@@ -6,14 +6,14 @@
 using namespace std;
 int main(void)
 {
-    int array[] = {6546, 54, 2, 651656, 648, 64, 8894, 65498, 564, 546, 849, 654984, 984, 9847};
+    int numlist[] = {654, 46, 56, 213, 6546, 5616, 6548, 651, 684869, 564, 645};
     SORT<int> intsort;
-    intsort.sort(array, 14);
-    for (int i = 0; i < 14; i++)
+    intsort.merge(numlist, 11);
+
+    for (int i = 0; i < 11; i++)
     {
-        cout<<array[i]<<" ";
+        cout << numlist[i] << " ";
     }
-    cout<<endl;
-    
+    cout << endl;
     return 0;
 }
