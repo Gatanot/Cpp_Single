@@ -344,32 +344,3 @@ void SORT<FirstType>::quick(std::vector<FirstType> &array)
 {
     quick_sort(array, 0, array.size() - 1);
 }
-
-
-
-//优先队列
-template <typename FirstType>
-class MaxPQ
-{
-private:
-   
-public:
-    MaxPQ();//创建一个优先队列
-    MaxPQ(int max);//创建一个初始容量为max的优先队列
-    MaxPQ(FirstType*array,int length);//用数组a中的元素创建
-    MaxPQ(std::vector<FirstType> &array);
-    void insert(FirstType item);//插入元素
-    FirstType max();//返回最大元素
-    FirstType delMax();//删除并返回最大元素
-    bool isEmpty();
-    int size();//返回元素个数
-};
-
-template <typename FirstType>
-MaxPQ<FirstType>::MaxPQ()
-{
-
-}
-
-
-
