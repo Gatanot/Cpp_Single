@@ -1,23 +1,21 @@
-// 无需链表节点
+// 无索引链表节点
 template <typename FirstType>
 class Node
 {
 private:
     FirstType value;
-    FirstType *next;
+    Node<FirstType> *next;
+    Node<FirstType> *last;
 
 public:
-    Node();
-    ~Node();
+    Node(FirstType item);
 };
 template <typename FirstType>
-Node<FirstType>::Node()
+Node<FirstType>::Node(FirstType item)
 {
+    value = item;
     next = nullptr;
-}
-template <typename FirstType>
-Node<FirstType>::~Node()
-{
+    last = nullptr;
 }
 
 // 无索引列表
@@ -25,21 +23,116 @@ template <typename FirstType>
 class LinkedList
 {
 private:
-    Node head;
+    Node<FirstType> *head;
 
 public:
     LinkedList();
     ~LinkedList();
+    void add(FirstType item);    // 在head后添加元素
+    bool find(FirstType item);   // 在链表中查找item
+    bool remote(FirstType item); // 在链表中移除item
+    bool isEmpty();              // 检查是否为空
+    int size();                  // 返回链表长度
 };
 template <typename FirstType>
 LinkedList<FirstType>::LinkedList()
 {
+    head->next = nullptr;
+    head->last = nullptr;
 }
 template <typename FirstType>
 LinkedList<FirstType>::~LinkedList()
 {
+    while (head->next != nullptr)
+    {
+        head = head->next;
+    }
+    while (head->last != nullptr)
+    {
+        head = head->last;
+        delete head->next;
+    }
+    delete head;
 }
-
+template <typename FirstType>
+void LinkedList<FirstType>::add(FirstType item)
+{
+    new Node<FirstType> *newnode;
+    newnode->value = item;
+    newnode->next = head->next;
+    newnode->last = head;
+    (newnode->next)->last = newnode;
+}
+template <typename FirstType>
+bool LinkedList<FirstType>::find(FirstType item)
+{
+    bool flag = false;
+    Node<FirstType> *origin = head;
+    while (head->next != nullptr)
+    {
+        head = head->next;
+        if (head->value == item)
+        {
+            flag = true;
+            break;
+        }
+    }
+    if (head->value == item)
+    {
+        flag = true;
+    }
+    head = origin;
+    delete origin;
+    return flag;
+}
+template <typename FirstType>
+bool LinkedList<FirstType>::remote(FirstType item)
+{
+    bool flag = flase;
+    Node<FirstType> *origin = head;
+    while (head->next != nullptr)
+    {
+        head = head->next;
+        if (head->value == item)
+        {
+            flag = true;
+            head->last = head->next;
+            (head->next)->last = head->last;
+            break;
+        }
+    }
+    if (head->value == item)
+    {
+        flag = true;
+        head->last = nullptr;
+    }
+    head = origin;
+    delete origin;
+    return flag;
+}
+template <typename FirstType>
+bool LinkedList<FirstType>::isEmpty()
+{
+    if (head->next == nullptr)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+template <typename FirstType>
+int LinkedList<FirstType>::size()
+{
+    int count = 0;
+    while (head->next != nullptr)
+    {
+        count++;
+        head = head->next;
+    }
+    return count;
+}
 // 背包
 template <typename FirstType>
 class Bag
