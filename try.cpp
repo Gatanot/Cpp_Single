@@ -14,6 +14,6 @@ int main(void)
     {
         cout << numlist[i] << " ";
     }
-    cout << endl;
+    cout << std::endl;
     return 0;
 }
