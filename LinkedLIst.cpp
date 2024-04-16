@@ -1,43 +1,45 @@
 #include <iostream>
 // 链表节点
-template <typename FirstType>
+
 class Node
 {
 private:
-    FirstType *value;
-    Node<FirstType> *last;
-    Node<FirstType> *next;
+    int value;
+    Node *last;
+    Node *next;
 
 public:
-    Node(FirstType newvalue) : value(newvalue), last(nullptr), next(nullptr) {}
-    Node(FirstType newvalue, Node<FirstType> *newlast, Node<FirstType> *newnext) : value(newvalue), last(newlast), next(newnext) {}
-    ~Node();
-    FirstType getvalue()
+    Node(int newvalue) : value(newvalue), last(nullptr), next(nullptr)
     {
-        return *value;
     }
-    Node<FirstType> *getnext();
-    void setnext(Node<FirstType> *newnext)
+    Node(int newvalue, Node *newlast, Node *newnext) : value(newvalue), last(newlast), next(newnext) {}
+    ~Node();
+    int getvalue()
+    {
+        return value;
+    }
+    Node *getnext();
+    void setnext(Node *newnext)
     {
         next = newnext;
     }
 };
-template <typename FirstType>
-Node<FirstType>::~Node()
+
+Node::~Node()
 {
-    delete value;
+    ;
 }
-template <typename FirstType>
-Node<FirstType> *Node<FirstType>::getnext()
+
+Node *Node::getnext()
 {
     return next;
 }
 // 动态链表
-template <typename FirstType>
+
 class LinkedList
 {
 private:
-    Node<FirstType> *head;
+    Node *head;
     int limit;
 
 public:
@@ -45,40 +47,40 @@ public:
     ~LinkedList();
     bool isEmpty();
     int size();
-    void add(FirstType value);
+    void add(int value);
     void print();
 };
-template <typename FirstType>
-LinkedList<FirstType>::~LinkedList()
+
+LinkedList::~LinkedList()
 {
     delete[] head;
 }
-template <typename FirstType>
-bool LinkedList<FirstType>::isEmpty()
+
+bool LinkedList::isEmpty()
 {
     return limit == 0;
 }
-template <typename FirstType>
-int LinkedList<FirstType>::size()
+
+int LinkedList::size()
 {
     return limit;
 }
-template <typename FirstType>
-void LinkedList<FirstType>::add(FirstType value)
+
+void LinkedList::add(int value)
 {
-    Node<FirstType> *temp = head;
+    Node *temp = head;
     for (int i = 0; i < limit; i++)
     {
         temp = temp->getnext();
     }
-    Node<FirstType> *newnode = new Node<FirstType>(value, temp, nullptr);
-    newnode->setnext(temp);
+    Node *newnode = new Node(value, temp, nullptr);
+    temp->setnext(newnode);
     limit++;
 }
-template <typename FirstType>
-void LinkedList<FirstType>::print()
+
+void LinkedList::print()
 {
-    Node<FirstType> *temp = head;
+    Node *temp = head;
     for (int i = 0; i < limit; i++)
     {
         temp = temp->getnext();
@@ -88,7 +90,7 @@ void LinkedList<FirstType>::print()
 
 int main()
 {
-    LinkedList<int> mylist;
+    LinkedList mylist;
     std::cout << mylist.size() << " " << mylist.isEmpty() << std::endl;
     for (int i = 0; i < 4; i++)
     {
