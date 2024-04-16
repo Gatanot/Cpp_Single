@@ -1,43 +1,6 @@
-// 背包
-template <typename FirstType>
-class Bag
-{
-private:
-public:
-    Bag(); // 创建空背包
-    ~Bag();
-    void add(FirstType item); // 添加一个元素
-    bool isEmpty();           // 检查背包是否为空
-    int size();               // 元素数量
-    void print();             // 输出背包中所有元素
-};
-// FIFO队列
-template <typename FirstType>
-class Queue
-{
-private:
-public:
-    Queue(); // 创建空队列
-    ~Queue();
-    void enqueue(FirstType item); // 添加一个元素
-    FirstType dequeue();          // 删除最早添加的元素；
-    bool isEmpty();               // 检查队列是否为空
-    int size();                   // 返回元素数量
-};
-// LIFO栈
-template <typename FirstType>
-class Stack
-{
-private:
-public:
-    Stack(); // 创建空栈
-    ~Stack();
-    void push(FirstType item); // 添加元素
-    FirstType pop();           // 删除最近添加的元素
-    bool isEmpty();            // 检查是否为空
-    int size();                // 返回元素数量
-};
-// 符号表
+#include <iostream>
+#include <string>
+
 template <typename Key, typename Value>
 class ST
 {
@@ -109,13 +72,20 @@ public:
     }
     bool contains(Key key)
     {
-        return get(key) == null;
+        for (int i = 0; i < limit; i++)
+        {
+            if (key == KeyData[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
     bool isEmpty()
     {
         return !limit;
     }
-    int size
+    int size()
     {
         return limit;
     }
@@ -127,24 +97,17 @@ public:
         }
     }
 };
-// 优先队列
-template <typename FirstType>
-class MaxPQ
+int main()
 {
-private:
-public:
-    MaxPQ();                             // 创建一个优先队列
-    MaxPQ(int max);                      // 创建一个初始容量为max的优先队列
-    MaxPQ(FirstType *array, int length); // 用数组a中的元素创建
-    MaxPQ(std::vector<FirstType> &array);
-    void insert(FirstType item); // 插入元素
-    FirstType max();             // 返回最大元素
-    FirstType delMax();          // 删除并返回最大元素
-    bool isEmpty();
-    int size(); // 返回元素个数
-};
+    ST<int, std::string> myst;
+    std::cout << myst.isEmpty() << std::endl;
+    for (int i = 0; i < 10; i++)
+    {
+        myst.put(i, "abcd");
+    }
+    std::cout << myst.size() << std::endl;
+    std::cout << myst.contains(90) << std::endl;
+    myst.keys();
 
-template <typename FirstType>
-MaxPQ<FirstType>::MaxPQ()
-{
+    return 0;
 }

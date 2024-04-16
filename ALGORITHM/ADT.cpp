@@ -53,25 +53,41 @@ public:
     bool isEmpty();
     int size(); // 返回元素个数
 };
-//符号表
-template <typename Key,typename Value>
+// 符号表
+template <typename Key, typename Value>
 class ST
 {
 private:
     Key *KeyData;
     Value *ValueData;
+    int limit;
+
 public:
-    ST():KeyData(nullptr),ValueData(nullptr);
+    ST() : KeyData(nullptr), ValueData(nullptr), limit(0);
     ~ST();
-    void put(Key key,Value value);
+    void put(Key key, Value value);
     Value get(Key key);
     bool contains(Key key);
     bool isEmpty();
     int size;
     void keys();
 };
-template <typename Key,typename Value>
-ST<Key,Value>::~ST(){
+template <typename Key, typename Value>
+ST<Key, Value>::~ST()
+{
     delete KeyData;
-    delete ValueData;  
+    delete ValueData;
+}
+template <typename Key, typename Value>
+void ST<Key, Value>::put(Key key, Value value)
+{
+    for (int i = 0; i < limit; i++)
+    {
+        if (KeyData[i] == key)
+        {
+            ValueData[i] = value;
+
+            return;
+        }
+    }
 }
