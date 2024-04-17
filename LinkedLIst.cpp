@@ -5,14 +5,13 @@ class Node
 {
 private:
     int value;
-    Node *last;
     Node *next;
 
 public:
-    Node(int newvalue) : value(newvalue), last(nullptr), next(nullptr)
+    Node(int newvalue) : value(newvalue), next(nullptr)
     {
     }
-    Node(int newvalue, Node *newlast, Node *newnext) : value(newvalue), last(newlast), next(newnext) {}
+    Node(int newvalue, Node *newnext) : value(newvalue), next(newnext) {}
     ~Node();
     int getvalue()
     {
@@ -43,7 +42,10 @@ private:
     int limit;
 
 public:
-    LinkedList() : head(nullptr), limit(0) {}
+    LinkedList() : head(nullptr), limit(0)
+    {
+        std::cout << "build right" << std::endl;
+    }
     ~LinkedList();
     bool isEmpty();
     int size();
@@ -68,14 +70,17 @@ int LinkedList::size()
 
 void LinkedList::add(int value)
 {
+    std::cout << "add from " << limit;
     Node *temp = head;
     for (int i = 0; i < limit; i++)
     {
         temp = temp->getnext();
     }
-    Node *newnode = new Node(value, temp, nullptr);
+    Node *newnode = new Node(value, nullptr);
+    // 创建newnode后为temp的next添加出错
     temp->setnext(newnode);
     limit++;
+    std::cout << " to " << limit << std::endl;
 }
 
 void LinkedList::print()
