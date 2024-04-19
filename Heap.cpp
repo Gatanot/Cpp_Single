@@ -36,10 +36,6 @@ public:
     {
         return capacity;
     }
-    int *getarray()
-    {
-        return data;
-    }
     void add(int value)
     {
         size++;
@@ -75,7 +71,7 @@ public:
         }
         std::cout << std::endl;
     }
-    int getIndex(int i)
+    int get(int i)
     {
         return data[i - 1];
     }
@@ -121,7 +117,7 @@ public:
             maxHeapify(data, i);
         }
     }
-    void heapSort()
+    void sort()
     {
         int temp = size;
         for (int i = temp; i >= 2; i--)
@@ -130,7 +126,7 @@ public:
             size--;
             maxHeapify(data, 1);
         }
-        size=temp;
+        size = temp;
     }
 };
 
@@ -145,6 +141,8 @@ int main()
     myheap.print();
     myheap.buildMaxHeap();
     myheap.print();
-    myheap.heapSort();
+    myheap.sort();
     myheap.print();
+
+    return 0;
 }
