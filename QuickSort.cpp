@@ -32,7 +32,7 @@ public:
     {
         int x = array[r];
         int i = l - 1;
-        for (int j = l; j < r - 1; j++)
+        for (int j = l; j <= r - 1; j++)
         {
             if (array[j] <= x)
             {
