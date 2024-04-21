@@ -1,5 +1,6 @@
+//算法导论第七章，快速排序
+//快速排序的描述，快速排序的性能，快速排序的随机化版本，快速排序分析
 #include <iostream>
-
 class QuickSort
 {
 private:
