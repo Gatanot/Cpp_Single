@@ -4,7 +4,7 @@
 class Counting
 {
 private:
-    z
+    ;
 public:
     Counting();
     ~Counting();
