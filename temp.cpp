@@ -1,12 +1,24 @@
 #include<iostream>
 using namespace std;
+void display();
+bool check();
 int main(){
-    int n;
-    int time[26]={0};
-    cin>>n;
-    for(int i=0;i<n;i++){
+    while(1){
+        display();
+        if (check())
+        {
+            return 0;
+        }else{
+            continue;;
+        }
         
     }
-
-    return 0;
+}
+void display(){
+    cout<<"Hello World"<<endl;
+}
+bool check(){
+    int n;
+    cin>>n;
+    return n%2==1;
 }
